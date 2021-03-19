@@ -1,5 +1,7 @@
 export interface Car{
     id:number;
+    brandId:number;
+    colorId:number;
     brandName:string;
     modelYear:string;
     colorName:string;
@@ -7,6 +9,5 @@ export interface Car{
     carModel:string;
     carEngine:string;
     carType:string;
-    unitsInStock:number;
     unitPrice:number;
 }
