@@ -10,4 +10,5 @@ export interface Car{
     carEngine:string;
     carType:string;
     unitPrice:number;
+    status:boolean;
 }

@@ -5,6 +5,12 @@
         </strong>
     </div>
     <div class="card-body"> 
+        <div class="d-grid gap-2 mb-2" *ngIf="carDetail.car.status == true">
+            <app-rental [car]="carDetail.car"></app-rental>
+        </div>
+        <div class="d-grid gap-2 mb-2" *ngIf="carDetail.car.status == false">
+            <div class="alert alert-danger">Araç şuan kiralanamaz</div>
+        </div>
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div *ngFor="let image of carDetail.carImages let i = index" [ngClass]="getSliderClassName(i)">
@@ -32,10 +38,10 @@
                    <th>Car Name</th>
                    <th>Engine</th>
                    <th>Car Type</th>
-               </tr>
-           </thead>
-           <tbody>
-               <tr>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
                    <td>{{carDetail.car.id}}</td>
                    <td>{{carDetail.car.brandName}}</td>
                    <td>{{carDetail.car.modelYear}}</td>
@@ -45,8 +51,8 @@
                    <td>{{carDetail.car.carName}}</td>
                    <td>{{carDetail.car.carEngine}}</td>
                    <td>{{carDetail.car.carType}}</td>
-               </tr>
-           </tbody>
-       </table>
-    </div>
-</div>
+                </tr>
+            </tbody>
+        </table>
+     </div>
+ </div>

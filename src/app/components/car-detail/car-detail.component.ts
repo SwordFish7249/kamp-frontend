@@ -11,12 +11,13 @@ import { environment } from 'src/environments/environment';
 })
 export class CarDetailComponent implements OnInit {
 
-  carDetail:CarDetailAndImagesDto;
-  dataLoaded = false;
-  imageBasePath = environment.baseUrl
+  
 
   constructor(private carDetailService:CarDetailService,private activatedRoute:ActivatedRoute) { }
 
+  carDetail:CarDetailAndImagesDto;
+  dataLoaded = false;
+  imageBasePath = environment.baseUrl
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params["carId"]){
@@ -28,7 +29,12 @@ export class CarDetailComponent implements OnInit {
 
   getCarDetail(carId:Number){
     this.carDetailService.getCarDetail(carId).subscribe(response => {
+      
       this.carDetail = response.data;
+      console.log(this.carDetail.carImages);
+
+
+
       this.dataLoaded = true;
     })
   }

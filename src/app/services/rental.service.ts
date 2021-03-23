@@ -9,11 +9,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RentalService {
-  apiUrl = environment.apiUrl +'rentals/getallrentaldetail'
   constructor(private httpClient:HttpClient) { }
-  getRental(): Observable<ListResponseModel<Rental>>{
 
-    return this.httpClient.get<ListResponseModel<Rental>>(this.apiUrl);
-
+  /*
+  rentalCar(rental:Rental):Observable<ResponseModel>{
+    let path = environment.apiUrl+"rentals/add";
+      return this.httpClient.post<ResponseModel>(path,rental);
   }
+  */
 }

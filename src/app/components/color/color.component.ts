@@ -9,8 +9,9 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ColorComponent implements OnInit {
   colors:Color[] = [];
-  currentColor?: Color;
+  currentColor:Color = {colorId:-1,colorName:""}
   dataLoaded = false;
+  filterText:String;
   constructor(private colorService:ColorService) { }
 
   ngOnInit(): void {
@@ -26,21 +27,22 @@ export class ColorComponent implements OnInit {
     this.currentColor = color;
   }
   getCurrentColorClass(color:Color){
-    if(color == this.currentColor){
+    if(this.currentColor == color){
       return "list-group-item active";
     } else {
       return "list-group-item"
     }
   }
-  setAllColor() {
-    this.currentColor = undefined;    
-  }
-  getAllColorClass() {
-    if (!this.currentColor || this.currentColor.colorId == 0) {
-      return 'list-group-item active';
+  getAllCurrentColorClass(){
+    let defaultColor:Color = {colorId:-1,colorName:""};
+    if(this.currentColor.colorId == defaultColor.colorId){
+      return "list-group-item active";
     } else {
-      return 'list-group-item';
+      return "list-group-item"
     }
   }
-  
+  removeCurrentColor(){
+    this.filterText = "";
+    this.currentColor={colorId:-1,colorName:""};
+  }
 }

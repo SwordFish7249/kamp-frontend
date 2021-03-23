@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
 
@@ -9,8 +9,9 @@ import { BrandService } from 'src/app/services/brand.service';
 })
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];
-  currentBrand?: Brand;
+  currentBrand: Brand =  {brandId:-1,brandName:""};
   dataLoaded = false;
+  filterText:String;
   constructor(private brandService: BrandService) { }
 
   ngOnInit(): void {
@@ -18,7 +19,7 @@ export class BrandComponent implements OnInit {
   }
 
   getBrands(){
-    this.brandService.getBrands().subscribe(response => {
+      this.brandService.getBrands().subscribe(response => {
       this.brands = response.data;
       this.dataLoaded = true;
     })
@@ -26,7 +27,10 @@ export class BrandComponent implements OnInit {
   setCurrentBrand(brand:Brand){
     this.currentBrand = brand;
   }
-  
+  removeCurrentBrand(){
+    this.filterText = "";
+    this.currentBrand = {brandId:-1,brandName:""};
+  }
   getCurrentBrandClass(brand:Brand){
     if(brand == this.currentBrand)
     {
@@ -35,14 +39,9 @@ export class BrandComponent implements OnInit {
       return "list-group-item cursorPointer";
     }
   }
-
-  setAllBrand() {
-    this.currentBrand = { brandId: -1, brandName: '' };
-  }
-
   getAllBrandClass(){
-    let defaultBrand:Brand ={brandId:-1,brandName:''};
-    if(this.currentBrand?.brandId == defaultBrand.brandId){ 
+    let defaultBrand:Brand ={brandId:-1,brandName:""};
+    if(this.currentBrand.brandId == defaultBrand.brandId){ 
       return "list-group-item active cursorPointer";
     } else {
       return "list-group-item cursorPointer";

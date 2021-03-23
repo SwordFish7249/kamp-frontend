@@ -1,17 +1,35 @@
-
-<table  class="table ">
+<div class="card mb-2">
+    <div class="card-header text-center">
+       <strong>Araç Listesi</strong>
+    </div>
+    <div class="card-body">
+   
+    
+<div *ngIf="dataLoaded == false" class="text-center">
+    <div class="spinner-border text-dark text-center" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+</div>  
+<app-car-filter></app-car-filter>
+<table *ngIf="dataLoaded == true" class="table table-hover table-bordered">
     <thead>
         <tr>
             <th>Id</th>
             <th>Brand</th>
+            <th>Daily Price</th>
             <th>Color</th>
+            <th></th>
         </tr>
     </thead>
-        <tr *ngFor="let car of cars" routerLink="/cars/car-detail/{{car.id}}">
+    <tbody>
+        <tr routerLink="/cars/car-detail/{{car.id}}" *ngFor="let car of cars | filterCar:filterText">
             <td>{{car.id}}</td>
             <td>{{car.brandName}}</td>
+            <td>{{car.unitPrice |currency}}</td>
             <td>{{car.colorName}}</td>
             <td> <button class="btn btn-warning text-center">Details</button> </td>
         </tr>
+    </tbody>
     </table>
-    
+    </div>
+</div>
